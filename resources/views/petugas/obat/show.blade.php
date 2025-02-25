@@ -3,7 +3,7 @@
             <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title">Lihat Buku</h4>
+                <h4 class="modal-title">Lihat Obat</h4>
                 <span wire:click="format" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </span>
@@ -12,26 +12,26 @@
                      <div class="row">
                          <div class="col-md-5">
                              <div class="row justify-content-center">
-                                 <img src="/storage/{{$sampul}}" alt="{{$judul}}" width="250" height="350">
+                                 <img src="/storage/{{$foto}}" alt="{{$nama}}" width="250" height="350">
                              </div>
                          </div>
                          <div class="col-md-7">
                              <table class="table text-nowrap">                    
                                 <tbody>
                                     <tr>
-                                        <th>Judul</th>
+                                        <th>Nama</th>
                                         <td>:</td>
-                                        <td>{{$judul}}</td>
+                                        <td>{{$nama}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Penulis</th>
+                                        <th>Satuan</th>
                                         <td>:</td>
-                                        <td>{{$penulis}}</td>
+                                        <td>{{$satuan}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Penerbit</th>
+                                        <th>Pengunjung</th>
                                         <td>:</td>
-                                        <td>{{$penerbit}}</td>
+                                        <td>{{$pengunjung}}</td>
                                     </tr>
                                     <tr>
                                         <th>Kategori</th>

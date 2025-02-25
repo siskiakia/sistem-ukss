@@ -44,7 +44,7 @@ class PeminjamanSeeder extends Seeder
 
             DetailPeminjaman::create([
                 'peminjaman_id' => $peminjaman->id,
-                'buku_id' => random_int(1,7)
+                'obat_id' => random_int(1,7)
             ]);
         }
     }

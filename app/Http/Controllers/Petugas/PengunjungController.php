@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Petugas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BukuController extends Controller
+class PengunjungController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,6 +15,6 @@ class BukuController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('petugas/buku/index');
+        return view('petugas/pengunjung/index');
     }
 }

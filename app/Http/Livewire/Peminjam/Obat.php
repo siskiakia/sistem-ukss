@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Peminjam;
 
-use App\Models\Buku as ModelsBuku;
+use App\Models\Obat as ModelsObat;
 use App\Models\DetailPeminjaman;
 use App\Models\Kategori;
 use App\Models\Peminjaman;
@@ -10,14 +10,14 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
-class Buku extends Component
+class Obat extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
     protected $listeners = ['pilihKategori', 'semuaKategori'];
 
-    public $kategori_id, $pilih_kategori, $buku_id, $detail_buku, $search;
+    public $kategori_id, $pilih_kategori, $obat_id, $detail_obat, $search;
 
     public function pilihKategori($id)
     {
@@ -34,14 +34,14 @@ class Buku extends Component
         $this->updatingSearch();
     }
 
-    public function detailBuku($id)
+    public function detailObat($id)
     {
         $this->format();
-        $this->detail_buku = true;
-        $this->buku_id = $id;
+        $this->detail_obat = true;
+        $this->obat_id = $id;
     }
 
-    public function keranjang(ModelsBuku $buku)
+    public function keranjang(ModelsObat $obat)
     {
         // user harus login
         if (auth()->user()) {
@@ -57,7 +57,7 @@ class Buku extends Component
 
                 // jumlah maksimal 2
                 if ($peminjaman_lama->count() == 2) {
-                    session()->flash('gagal', 'Buku yang dipinjam maksimal 2');
+                    session()->flash('gagal', 'Obat yang dipinjam maksimal 2');
                 } else {
 
                     // peminjaman belum ada isinya
@@ -70,25 +70,25 @@ class Buku extends Component
 
                         DetailPeminjaman::create([
                             'peminjaman_id' => $peminjaman_baru->id,
-                            'buku_id' => $buku->id
+                            'obat_id' => $obat->id
                         ]);
 
                         $this->emit('tambahKeranjang');
-                        session()->flash('sukses', 'Buku berhasil ditambahkan ke dalam keranjang');
+                        session()->flash('sukses', 'Obat berhasil ditambahkan ke dalam keranjang');
                     } else {
 
                         // buku tidak boleh sama
-                        if ($peminjaman_lama[0]->buku_id == $buku->id) {
-                            session()->flash('gagal', 'Buku tidak boleh sama');
+                        if ($peminjaman_lama[0]->obat_id == $obat->id) {
+                            session()->flash('gagal', 'Obat tidak boleh sama');
                         } else {
 
                             DetailPeminjaman::create([
                                 'peminjaman_id' => $peminjaman_lama[0]->peminjaman_id,
-                                'buku_id' => $buku->id
+                                'obat_id' => $obat->id
                             ]);
 
                             $this->emit('tambahKeranjang');
-                            session()->flash('sukses', 'Buku berhasil ditambahkan ke dalam keranjang');
+                            session()->flash('sukses', 'Obat berhasil ditambahkan ke dalam keranjang');
                         }
 
                     }
@@ -115,31 +115,31 @@ class Buku extends Component
     {
         if ($this->pilih_kategori) {
             if ($this->search) {
-                $buku = ModelsBuku::latest()->where('judul', 'like', '%'. $this->search .'%')->where('kategori_id', $this->kategori_id)->paginate(12);
+                $obat = ModelsObat::latest()->where('nama', 'like', '%'. $this->search .'%')->where('kategori_id', $this->kategori_id)->paginate(12);
             } else {
-                $buku = ModelsBuku::latest()->where('kategori_id', $this->kategori_id)->paginate(12);
+                $obat = ModelsObat::latest()->where('kategori_id', $this->kategori_id)->paginate(12);
             }
             $title = Kategori::find($this->kategori_id)->nama;
-        }elseif ($this->detail_buku) {
-            $buku = ModelsBuku::find($this->buku_id);
-            $title = 'Detail Buku';
+        }elseif ($this->detail_obat) {
+            $obat = ModelsObat::find($this->obat_id);
+            $title = 'Detail Obat';
         } else {
             if ($this->search) {
-                $buku = ModelsBuku::latest()->where('judul', 'like', '%'. $this->search .'%')->paginate(12);
+                $obat = ModelsObat::latest()->where('nama', 'like', '%'. $this->search .'%')->paginate(12);
             } else {
-                $buku = ModelsBuku::latest()->paginate(12);
+                $obat = ModelsObat::latest()->paginate(12);
             }
-            $title = 'Semua Buku';
+            $title = 'Semua Obat';
         }
         
-        return view('livewire.peminjam.buku', compact('buku', 'title'));
+        return view('livewire.peminjam.obat', compact('obat', 'title'));
     }
 
     public function format()
     {
-        $this->detail_buku = false;
+        $this->detail_obat = false;
         $this->pilih_kategori = false;
-        unset($this->buku_id);
+        unset($this->obat_id);
         unset($this->kategori_id);
     }
 }

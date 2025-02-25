@@ -32,8 +32,8 @@
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>Judul</th>
-                    <th>Penulis</th>
+                    <th>Nama</th>
+                    <th>Satuan</th>
                     <th>Rak</th>
                     <th>Baris</th>
                     @if (!$keranjang->tanggal_pinjam)
@@ -45,10 +45,10 @@
                     @foreach ($keranjang->detail_peminjaman as $item)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$item->buku->judul}}</td>
-                            <td>{{$item->buku->penulis}}</td>
-                            <td>{{$item->buku->rak->rak}}</td>
-                            <td>{{$item->buku->rak->baris}}</td>
+                            <td>{{$item->obat->nama}}</td>
+                            <td>{{$item->obat->satuan}}</td>
+                            <td>{{$item->obat->rak->rak}}</td>
+                            <td>{{$item->obat->rak->baris}}</td>
                             <td>
                                 @if (!$keranjang->tanggal_pinjam)
                                     <button wire:click="hapus({{$keranjang->id}}, {{$item->id}})" class="btn btn-sm btn-danger">Hapus</button>

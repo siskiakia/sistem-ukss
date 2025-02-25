@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Penerbit;
+use App\Models\Pengunjung;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-class PenerbitSeeder extends Seeder
+class PengunjungSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +15,10 @@ class PenerbitSeeder extends Seeder
      */
     public function run()
     {
-        $penerbit = ['none', 'gramedia', 'erlangga'];
+        $Pengunjung = ['admin', 'petugas', 'peminjam'];
 
-        foreach ($penerbit as $key => $value) {
-            Penerbit::create([
+        foreach ($Pengunjung as $key => $value) {
+            Pengunjung::create([
                 'nama' => $value,
                 'slug' => Str::slug($value)
             ]);

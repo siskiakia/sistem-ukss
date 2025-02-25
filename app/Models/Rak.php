@@ -17,9 +17,9 @@ class Rak extends Model
         return $this->belongsTo(Kategori::class);
     }
 
-    public function buku()
+    public function obat()
     {
-        return $this->hasMany(Buku::class);
+        return $this->hasMany(Obat::class);
     }
 
     // accesor

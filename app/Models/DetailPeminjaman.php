@@ -10,15 +10,15 @@ class DetailPeminjaman extends Model
     use HasFactory;
 
     protected $table = 'detail_peminjaman';
-    protected $fillable = ['peminjaman_id', 'buku_id'];
+    protected $fillable = ['peminjaman_id', 'obat_id'];
 
     public function peminjaman()
     {
         return $this->belongsTo(Peminjaman::class);
     }
 
-    public function buku()
+    public function obat()
     {
-        return $this->belongsTo(Buku::class);
+        return $this->belongsTo(Obat::class);
     }
 }

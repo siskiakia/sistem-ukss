@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Peminjam;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BukuController extends Controller
+class ObatController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,6 +15,6 @@ class BukuController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('peminjam/buku/index');
+        return view('peminjam/obat/index');
     }
 }

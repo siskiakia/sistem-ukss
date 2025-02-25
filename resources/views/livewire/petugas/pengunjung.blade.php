@@ -3,10 +3,9 @@
 
     @include('admin-lte/flash')
 
-    @include('petugas/buku/create')
-    @include('petugas/buku/edit')
-    @include('petugas/buku/delete')
-    @include('petugas/buku/show')
+    @include('petugas/pengunjung/create')
+    @include('petugas/pengunjung/edit')
+    @include('petugas/pengunjung/delete')
 
     <div class="card">
         <div class="card-header">
@@ -25,30 +24,23 @@
             </div>
             </div>
             <!-- /.card-header -->
-            @if ($buku->isNotEmpty())
+            @if ($pengunjung->isNotEmpty())
             <div class="card-body table-responsive p-0">
             <table class="table table-hover text-nowrap">
                 <thead>
                 <tr>
                     <th width="10%">No</th>
-                    <th>Sampul</th>
-                    <th>Judul</th>
-                    <th>Penulis</th>
-                    <th>Kategori</th>
+                    <th>Pengunjung</th>
                     <th width="15%">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($buku as $item)
+                @foreach ($pengunjung as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td><img src="/storage/{{$item->sampul}}" alt="{{$item->judul}}" width="60" height="80"></td>
-                        <td>{{$item->judul}}</td>
-                        <td>{{$item->penulis}}</td>
-                        <td>{{$item->kategori->nama}}</td>
+                        <td>{{$item->nama}}</td>
                         <td>
                             <div class="btn-group">
-                                <span wire:click="show({{$item->id}})" class="btn btn-sm btn-success mr-2">Lihat</span>
                                 <span wire:click="edit({{$item->id}})" class="btn btn-sm btn-primary mr-2">Edit</span>
                                 <span wire:click="delete({{$item ->id}})" class="btn btn-sm btn-danger">Hapus</span>
                             </div>
@@ -59,15 +51,15 @@
             </table>
         </div>
         <!-- /.card-body -->
-         @endif
+        @endif
     </div>
     <!-- /.card -->
 
     <div class="row justify-content-center">
-        {{$buku->links()}}
+        {{$pengunjung->links()}}
     </div>
 
-    @if ($buku->isEmpty())
+    @if ($pengunjung->isEmpty())
         <div class="card">
             <div class="card-body">
                 <div class="alert alert-warning">

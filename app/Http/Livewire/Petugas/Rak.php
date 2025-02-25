@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Petugas;
 
-use App\Models\Buku;
+use App\Models\Obat;
 use App\Models\Kategori;
 use App\Models\Rak as ModelsRak;
 use Livewire\Component;
@@ -95,8 +95,8 @@ class Rak extends Component
 
     public function destroy(ModelsRak $rak)
     {
-        $buku = Buku::where('rak_id', $rak->id)->get();
-        foreach ($buku as $key => $value) {
+        $obat = Obat::where('rak_id', $rak->id)->get();
+        foreach ($obat as $key => $value) {
             $value->update([
                 'rak_id' => 1
             ]);

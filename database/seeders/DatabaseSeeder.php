@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             KategoriSeeder::class,
             RakSeeder::class,
-            PenerbitSeeder::class,
-            BukuSeeder::class,
+            PengunjungSeeder::class,
+            ObatSeeder::class,
             TransaksiSeeder::class,
             PeminjamanSeeder::class,
         ]);;

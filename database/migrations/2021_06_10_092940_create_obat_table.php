@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePenerbitTable extends Migration
+class CreateObatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,16 @@ class CreatePenerbitTable extends Migration
      */
     public function up()
     {
-        Schema::create('penerbit', function (Blueprint $table) {
+        Schema::create('obat', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('slug');
+            $table->string('foto');
+            $table->string('satuan');
+            $table->foreignId('pengunjung_id');
+            $table->foreignId('kategori_id');
+            $table->foreignId('rak_id');
+            $table->integer('stok');
             $table->timestamps();
         });
     }
@@ -28,6 +34,6 @@ class CreatePenerbitTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penerbit');
+        Schema::dropIfExists('obat');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Petugas;
 
-use App\Models\Buku;
+use App\Models\Obat;
 use App\Models\Kategori as ModelsKategori;
 use App\Models\Rak;
 use Livewire\Component;
@@ -81,8 +81,8 @@ class Kategori extends Component
             ]);
         }
 
-        $buku = Buku::where('kategori_id', $kategori->id)->get();
-        foreach ($buku as $key => $value) {
+        $obat = Obat::where('kategori_id', $kategori->id)->get();
+        foreach ($obat as $key => $value) {
             $value->update([
                 'kategori_id' => 1
             ]);

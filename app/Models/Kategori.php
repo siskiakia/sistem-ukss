@@ -17,9 +17,9 @@ class Kategori extends Model
         return $this->hasMany(Rak::class);
     }
 
-    public function buku()
+    public function obat()
     {
-        return $this->hasMany(Buku::class);
+        return $this->hasMany(Obat::class);
     }
 
     // mutator

@@ -9,6 +9,9 @@ use Livewire\WithPagination;
 
 class Transaksi extends Component
 {
+    public $isModalOpen = false;
+
+
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -35,8 +38,8 @@ class Transaksi extends Component
     public function pinjam(Peminjaman $peminjaman)
     {
         foreach ($peminjaman->detail_peminjaman as $detail_peminjaman) {
-            $detail_peminjaman->buku->update([
-                'stok' => $detail_peminjaman->buku->stok -1
+            $detail_peminjaman->obat->update([
+                'stok' => $detail_peminjaman->obat->stok -1
             ]);
         }
 
@@ -45,7 +48,7 @@ class Transaksi extends Component
             'status' => 2
         ]);
 
-        session()->flash('sukses', 'Buku berhasil dipinjam.');
+        session()->flash('sukses', 'Obat berhasil dipinjam.');
     }
 
     public function kembali(Peminjaman $peminjaman)
@@ -58,8 +61,8 @@ class Transaksi extends Component
         ];
 
         foreach ($peminjaman->detail_peminjaman as $detail_peminjaman) {
-            $detail_peminjaman->buku->update([
-                'stok' => $detail_peminjaman->buku->stok + 1
+            $detail_peminjaman->obat->update([
+                'stok' => $detail_peminjaman->obat->stok + 1
             ]);
         }
 
@@ -70,7 +73,13 @@ class Transaksi extends Component
         }
         
         $peminjaman->update($data);
-        session()->flash('sukses', 'Buku berhasil dikembalikan.');
+        session()->flash('sukses', 'Obat berhasil dikembalikan.');
+    }
+
+    public function create()
+    {
+        // Tambahan method create untuk menghindari error
+        session()->flash('info', 'Metode create dipanggil.');
     }
 
     public function render()

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Petugas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PenerbitController extends Controller
+class ObatController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,6 +15,6 @@ class PenerbitController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('petugas/penerbit/index');
+        return view('petugas/obat/index');
     }
 }

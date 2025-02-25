@@ -30,11 +30,11 @@ class TransaksiSeeder extends Seeder
         
         DetailPeminjaman::create([
             'peminjaman_id' => 1,
-            'buku_id' => 1
+            'obat_id' => 1
         ]);
         DetailPeminjaman::create([
             'peminjaman_id' => 1,
-            'buku_id' => 2
+            'obat_id' => 2
         ]);
        
         // data 2
@@ -49,11 +49,11 @@ class TransaksiSeeder extends Seeder
         
         DetailPeminjaman::create([
             'peminjaman_id' => 2,
-            'buku_id' => 4
+            'obat_id' => 4
         ]);
         DetailPeminjaman::create([
             'peminjaman_id' => 2,
-            'buku_id' => 5
+            'obat_id' => 5
         ]);
       
         // data 3
@@ -67,11 +67,11 @@ class TransaksiSeeder extends Seeder
         
         DetailPeminjaman::create([
             'peminjaman_id' => 3,
-            'buku_id' => 6
+            'obat_id' => 6
         ]);
         DetailPeminjaman::create([
             'peminjaman_id' => 3,
-            'buku_id' => 7
+            'obat_id' => 7
         ]);
        
         // data 4
@@ -83,7 +83,7 @@ class TransaksiSeeder extends Seeder
         
         DetailPeminjaman::create([
             'peminjaman_id' => 4,
-            'buku_id' => 3
+            'obat_id' => 3
         ]);
     }
 }

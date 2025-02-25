@@ -50,7 +50,7 @@ class Keranjang extends Component
             'tanggal_kembali' => Carbon::create($this->tanggal_pinjam)->addDays(10)
         ]);
 
-        session()->flash('sukses', 'Buku berhasil dipinjam');
+        session()->flash('sukses', 'Obat berhasil dipinjam');
     }
 
     public function render()

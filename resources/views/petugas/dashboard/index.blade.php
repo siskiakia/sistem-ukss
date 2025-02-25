@@ -9,9 +9,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>{{$count_buku}}</h3>
+                <h3>{{$count_obat}}</h3>
 
-                <p>Buku</p>
+                <p>Obat</p>
               </div>
               <div class="icon">
                 <i class="fas fa-book"></i>
@@ -78,20 +78,20 @@
           <div class="col-md-6">
             <div class="card">
               <div class="card-body">
-                <h5>Buku Terbaru</h5>
+                <h5>Obat Terbaru</h5>
                  <table class="table table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Judul</th>
+                      <th>Nama</th>
                       <th>Tanggal</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($buku as $item)
+                    @foreach ($obat as $item)
                         <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$item->judul}}</td>
+                        <td>{{$item->nama}}</td>
                         <td>{{$item->created_at->diffForHumans()}}</td>
                       </tr>
                     @endforeach

@@ -2,19 +2,19 @@
 
 namespace App\Http\Livewire\Petugas;
 
-use App\Models\Buku;
-use App\Models\Penerbit as ModelsPenerbit;
+use App\Models\Obat;
+use App\Models\Pengunjung as ModelsPengunjung;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
 
-class Penerbit extends Component
+class Pengunjung extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
     public $create, $edit, $delete;
-    public $nama, $penerbit_id, $search;
+    public $nama, $pengunjung_id, $search;
 
     protected $rules = [
         'nama' => 'required',
@@ -29,7 +29,7 @@ class Penerbit extends Component
     {
         $this->validate();
 
-        ModelsPenerbit::create([
+        ModelsPengunjung::create([
             'nama' => $this->nama,
             'slug' => Str::slug($this->nama)
         ]);
@@ -38,20 +38,20 @@ class Penerbit extends Component
         $this->format();
     }
 
-    public function edit(ModelsPenerbit $penerbit)
+    public function edit(ModelsPengunjung $pengunjung)
     {
         $this->format();
 
         $this->edit = true;
-        $this->nama = $penerbit->nama;
-        $this->penerbit_id = $penerbit->id;
+        $this->nama = $pengunjung->nama;
+        $this->pengunjung_id = $pengunjung->id;
     }
 
-    public function update(ModelsPenerbit $penerbit)
+    public function update(ModelsPengunjung $pengunjung)
     {
         $this->validate();
 
-        $penerbit->update([
+        $pengunjung->update([
             'nama' => $this->nama,
             'slug' => Str::slug($this->nama)
         ]);
@@ -60,21 +60,21 @@ class Penerbit extends Component
         $this->format();
     }
 
-    public function delete(ModelsPenerbit $penerbit)
+    public function delete(ModelsPengunjung $pengunjung)
     {
         $this->delete = true;
-        $this->penerbit_id = $penerbit->id;
+        $this->pengunjung_id = $pengunjung->id;
     }
 
-    public function destroy(ModelsPenerbit $penerbit)
+    public function destroy(ModelsPengunjung $pengunjung)
     {
-        $buku = Buku::where('penerbit_id', $penerbit->id)->get();
-        foreach ($buku as $key => $value) {
+        $obat = Obat::where('pengunjung_id', $pengunjung->id)->get();
+        foreach ($obat as $key => $value) {
             $value->update([
-                'penerbit_id' => 1
+                'pengunjung_id' => 1
             ]);
         }
-        $penerbit->delete();
+        $pengunjung->delete();
 
         session()->flash('sukses', 'Data berhasil dihapus.');
         $this->format();
@@ -88,13 +88,13 @@ class Penerbit extends Component
     public function render()
     {
         if ($this->search) {
-            $penerbit = ModelsPenerbit::latest()->where('nama', 'like', '%'. $this->search .'%')->paginate(5);
+            $pengunjung = ModelsPengunjung::latest()->where('nama', 'like', '%'. $this->search .'%')->paginate(5);
         } else {
-            $penerbit = ModelsPenerbit::latest()->paginate(5);
+            $pengunjung = ModelsPengunjung::latest()->paginate(5);
         }
         
-        return view('livewire.petugas.penerbit', [
-            'penerbit' => $penerbit
+        return view('livewire.petugas.pengunjung', [
+            'pengunjung' => $pengunjung
         ]);
     }
 
@@ -104,6 +104,6 @@ class Penerbit extends Component
         unset($this->edit);
         unset($this->delete);
         unset($this->nama);
-        unset($this->penerbit_id);
+        unset($this->pengunjung_id);
     }
 }

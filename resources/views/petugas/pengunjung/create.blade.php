@@ -3,14 +3,14 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title">Tambah Penerbit</h4>
+                <h4 class="modal-title">Tambah Pengunjung</h4>
                 <span wire:click="format" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </span>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="penerbit">Penerbit</label>
+                        <label for="pengunjung">Pengunjung</label>
                         <input wire:model="nama" type="text" class="form-control" id="nama" min="1">
                         @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>

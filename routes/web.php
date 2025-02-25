@@ -2,20 +2,20 @@
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CekRoleController;
-use App\Http\Controllers\Peminjam\BukuController as PeminjamBukuController;
+use App\Http\Controllers\Peminjam\ObatController as PeminjamObatController;
 use App\Http\Controllers\Peminjam\KeranjangController;
-use App\Http\Controllers\Petugas\BukuController;
+use App\Http\Controllers\Petugas\ObatController;
 use App\Http\Controllers\Petugas\ChartController;
 use App\Http\Controllers\Petugas\DashboardController;
 use App\Http\Controllers\Petugas\KategoriController;
-use App\Http\Controllers\Petugas\PenerbitController;
+use App\Http\Controllers\Petugas\PengunjungController;
 use App\Http\Controllers\Petugas\RakController;
 use App\Http\Controllers\Petugas\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
-Route::get('/', PeminjamBukuController::class);
+Route::get('/', PeminjamObatController::class);
 
 Auth::routes();
 
@@ -29,8 +29,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/kategori', KategoriController::class);
         Route::get('/rak', RakController::class);
-        Route::get('/penerbit', PenerbitController::class);
-        Route::get('/buku', BukuController::class);
+        Route::get('/pengunjung', PengunjungController::class);
+        Route::get('/obat', ObatController::class);
         Route::get('/transaksi', TransaksiController::class);
         Route::get('/chart', ChartController::class);
     });

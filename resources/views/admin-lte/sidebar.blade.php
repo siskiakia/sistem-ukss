@@ -54,15 +54,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/penerbit" class="nav-link  @yield('active-penerbit')">
+                <a href="/pengunjung" class="nav-link  @yield('active-pengunjung')">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Penerbit</p>
+                  <p>Pengunjung</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/buku" class="nav-link  @yield('active-buku')">
+                <a href="/obat" class="nav-link  @yield('active-obat')">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Buku</p>
+                  <p>Obat</p>
                 </a>
               </li>
             </ul>
