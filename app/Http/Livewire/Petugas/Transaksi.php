@@ -82,6 +82,12 @@ class Transaksi extends Component
         session()->flash('info', 'Metode create dipanggil.');
     }
 
+    public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
+
+
     public function render()
     {
         if ($this->search) {
@@ -105,11 +111,10 @@ class Transaksi extends Component
                 $transaksi = Peminjaman::latest()->where('status', '!=', 0)->paginate(5);
             }
         }
-    
         return view('livewire.petugas.transaksi', [
             'transaksi' => $transaksi
         ]);
-    }
+    }        
 
     public function format()
     {

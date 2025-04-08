@@ -20,6 +20,10 @@ class PengunjungSeeder extends Seeder
         foreach ($Pengunjung as $key => $value) {
             Pengunjung::create([
                 'nama' => $value,
+                'kelas' => $value,
+                'tanggal' => $value,
+                'keluhan' => $value,
+                'obat' => $value,
                 'slug' => Str::slug($value)
             ]);
         }

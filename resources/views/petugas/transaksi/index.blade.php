@@ -5,3 +5,4 @@
 @section('content')
     <livewire:petugas.transaksi></livewire:petugas.transaksi>
 @endsection
+

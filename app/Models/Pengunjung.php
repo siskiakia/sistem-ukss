@@ -10,7 +10,9 @@ class Pengunjung extends Model
     use HasFactory;
 
     protected $table = 'pengunjung';
-    protected $fillable = ['nama', 'slug'];
+    // protected $fillable = ['nama','kelas', 'tanggal', 'keluhan', 'obat', 'slug'];
+    protected $fillable = ['nama', 'kelas', 'tanggal', 'keluhan','obat'];
+
 
     // relation
     public function obat()
@@ -22,5 +24,9 @@ class Pengunjung extends Model
     public function setNamaAttribute($value)
     {
         $this->attributes['nama'] = ucfirst($value);
+        $this->attributes['kelas'] = ucfirst($value);
+        $this->attributes['tanggal'] = ucfirst($value);
+        $this->attributes['keluhan'] = ucfirst($value);
+        $this->attributes['obat'] = ucfirst($value);
     }
 }

@@ -14,10 +14,14 @@ class Pengunjung extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $create, $edit, $delete;
-    public $nama, $pengunjung_id, $search;
+    public $nama, $kelas, $tanggal,$keluhan, $obat, $pengunjung_id, $search;
 
     protected $rules = [
         'nama' => 'required',
+        'kelas' => 'required',
+        'tanggal' => 'required',
+        'keluhan' => 'required',
+        'obat' => 'required',
     ];
 
     public function create()
@@ -31,7 +35,11 @@ class Pengunjung extends Component
 
         ModelsPengunjung::create([
             'nama' => $this->nama,
-            'slug' => Str::slug($this->nama)
+            'kelas' => $this->kelas,
+            'tanggal' => $this->tanggal,
+            'keluhan' => $this->keluhan,
+            'obat' => $this->obat,
+            'slug' => Str::slug($this->obat)
         ]);
 
         session()->flash('sukses', 'Data berhasil ditambahkan.');
@@ -44,6 +52,10 @@ class Pengunjung extends Component
 
         $this->edit = true;
         $this->nama = $pengunjung->nama;
+        $this->kelas = $pengunjung->kelas;
+        $this->tanggal = $pengunjung->tanggal;
+        $this->keluhan = $pengunjung->keluhan;
+        $this->obat = $pengunjung->obat;
         $this->pengunjung_id = $pengunjung->id;
     }
 
@@ -52,8 +64,12 @@ class Pengunjung extends Component
         $this->validate();
 
         $pengunjung->update([
-            'nama' => $this->nama,
-            'slug' => Str::slug($this->nama)
+            'nama'          => $this->nama,
+            'kelas'         => $this->kelas,
+            'tanggal'       => $this->tanggal,
+            'keluhan'       => $this->keluhan,
+            'obat'          => $this->obat,
+            'slug'          => Str::slug($this->obat)
         ]);
 
         session()->flash('sukses', 'Data berhasil diubah.');

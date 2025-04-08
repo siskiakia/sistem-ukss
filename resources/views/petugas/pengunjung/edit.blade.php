@@ -11,7 +11,17 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="pengunjung">Pengunjung</label>
+                        <br>
+                        <label for="pengunjung">nama</label>
                         <input wire:model="nama" type="text" class="form-control" id="pengunjung" min="1">
+                        <label for="pengunjung">kelas</label>
+                        <input wire:model="kelas" type="text" class="form-control" id="pengunjung" min="1">
+                        <label for="pengunjung">tanggal</label>
+                        <input wire:model="tanggal" type="date" class="form-control" id="pengunjung" min="1">
+                        <label for="pengunjung">keluhan</label>
+                        <input wire:model="keluhan" type="text" class="form-control" id="pengunjung" min="1">
+                        <label for="pengunjung">obat</label>
+                        <input wire:model="obat" type="text" class="form-control" id="pengunjung" min="1">
                         @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                 </div>

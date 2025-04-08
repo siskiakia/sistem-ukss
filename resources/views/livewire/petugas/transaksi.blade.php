@@ -1,139 +1,84 @@
-<div class="row">
-    <div class="col-12">
+<div class="container mt-4">
+    <h3 class="mb-3"></h3>
 
-    @include('admin-lte/flash')
-
-    <div class="btn-group mb-3">
-        <button wire:click="format" class="btn btn-sm bg-teal mr-2">Semua</button>
-        <button wire:click="belumDipinjam" class="btn btn-sm bg-indigo mr-2">Belum Dipinjam</button>
-        <button wire:click="sedangDipinjam" class="btn btn-sm bg-olive mr-2">Sedang Dipinjam</button>
-        <button wire:click="selesaiDipinjam" class="btn btn-sm bg-fuchsia mr-2">Selesai Dipinjam</button>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            <span wire:click="create" class="btn btn-sm btn-primary">Tambah</span>
-
-            <div class="card-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                    <input wire:model="search" type="search" name="table_search" class="form-control float-right" placeholder="Search">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-default">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+    {{-- Filter & Pencarian --}}
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <button class="btn btn-outline-primary" wire:click="belumDipinjam">Belum Dipinjam</button>
+            <button class="btn btn-outline-warning" wire:click="sedangDipinjam">Sedang Dipinjam</button>
+            <button class="btn btn-outline-success" wire:click="selesaiDipinjam">Selesai Dipinjam</button>
         </div>
-        <!-- /.card-header -->
-
-        @if ($transaksi->isNotEmpty())
-        <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap">
-                <thead>
-                    <tr>
-                        <th width="10%">No</th>
-                        <th>Kode Pinjam</th>
-                        <th>Obat</th>
-                        <th>Lokasi</th>
-                        <th>Tanggal Pinjam</th>
-                        <th>Tanggal Kembali</th>
-                        <th>Denda</th>
-                        <th>Status</th>
-                        @if (!$selesai_dipinjam)
-                            <th width="15%">Aksi</th>
-                        @endif
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($transaksi as $item)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$item->kode_pinjam}}</td>
-                            <td>
-                                <ul>
-                                    @foreach ($item->detail_peminjaman as $detail_peminjaman)
-                                    <li>{{$detail_peminjaman->obat->nama}}</li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    @foreach ($item->detail_peminjaman as $detail_peminjaman)
-                                    <li>{{$detail_peminjaman->obat->rak->lokasi}}</li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                            <td>{{$item->tanggal_pinjam}}</td>
-                            <td>{{$item->tanggal_kembali}}</td>
-                            <td>{{$item->denda}}</td>
-                            <td>
-                                @if ($item->status == 1)
-                                    <span class="badge bg-indigo">Belum Dipinjam</span>
-                                @elseif ($item->status == 2)
-                                    <span class="badge bg-olive">Sedang Dipinjam</span>
-                                @else
-                                    <span class="badge bg-fuchsia">Selesai Dipinjam</span>
-                                @endif
-                            </td>
-                            @if (!$selesai_dipinjam)
-                                <td>
-                                    @if ($item->status == 1)
-                                        <span wire:click="pinjam({{$item->id}})" class="btn btn-sm btn-success mr-2">Pinjam</span>
-                                    @elseif ($item->status == 2)
-                                        <span wire:click="kembali({{$item->id}})" class="btn btn-sm btn-primary mr-2">Kembali</span>
-                                    @endif
-                                </td>
-                            @endif
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="col-md-6">
+            <input type="text" class="form-control" wire:model="search" placeholder="Cari kode pinjam...">
         </div>
-        <!-- /.card-body -->
-        @endif
-    </div>
-    <!-- /.card -->
-
-    <div class="row justify-content-center">
-        {{$transaksi->links()}}
     </div>
 
-    @if ($transaksi->isEmpty())
-        <div class="card">
-            <div class="card-body">
-                <div class="alert alert-warning">
-                    Anda tidak memiliki data
-                </div>
-            </div>
+    {{-- Alert Notifikasi --}}
+    @if(session()->has('sukses'))
+        <div class="alert alert-success">
+            {{ session('sukses') }}
         </div>
     @endif
 
+    {{-- Tabel Data --}}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Kode Pinjam</th>
+                    <th>Peminjam</th>
+                    <th>Obat</th>
+                    <th>Jumlah</th>
+                    <th>Tanggal Pinjam</th>
+                    <th>Tanggal Kembali</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($transaksi as $item)
+                    <tr>
+                        <td>{{ $item->kode_pinjam }}</td>
+                        <td>{{ $item->user ? $item->user->name : 'Tidak Diketahui' }}</td>
+                        <td>
+                            @foreach($item->detail_peminjaman as $detail)
+                                {{ $detail->obat->nama }} ({{ $detail->jumlah }})
+                                <br>
+                            @endforeach
+                        </td>
+                        <td>{{ $item->jumlah }}</td>
+                        <td>{{ $item->tanggal_pinjam }}</td>
+                        <td>{{ $item->tanggal_kembali }}</td>
+                        <td>
+                            @if($item->status == 1)
+                                <span class="badge badge-secondary">Belum Dipinjam</span>
+                            @elseif($item->status == 2)
+                                <span class="badge badge-warning">Sedang Dipinjam</span>
+                            @elseif($item->status == 3)
+                                <span class="badge badge-success">Selesai</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($item->status == 1)
+                                <button class="btn btn-primary btn-sm" wire:click="pinjam({{ $item->id }})">Pinjam</button>
+                            @elseif($item->status == 2)
+                                <button class="btn btn-success btn-sm" wire:click="kembali({{ $item->id }})">Kembalikan</button>
+                            @else
+                                <span>-</span>
+                            @endif
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="8" class="text-center">Tidak ada data transaksi</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
-</div>
-<!-- /.row -->
 
-<!-- 🔹 MODAL TAMBAH DATA -->
-@if($isModalOpen)
-<div class="modal fade show d-block" tabindex="-1" style="background: rgba(0,0,0,0.5);">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Data Peminjaman</h5>
-                <button type="button" class="close" wire:click="$set('isModalOpen', false)">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <label for="kode_pinjam">Kode Pinjam</label>
-                <input type="text" class="form-control" wire:model="kode_pinjam">
-                @error('kode_pinjam') <span class="text-danger">{{ $message }}</span> @enderror
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" wire:click="$set('isModalOpen', false)">Tutup</button>
-                <button class="btn btn-primary" wire:click="store">Simpan</button>
-            </div>
-        </div>
+    {{-- Pagination --}}
+    <div class="d-flex justify-content-center">
+        {{ $transaksi->links() }}
     </div>
 </div>
-@endif
